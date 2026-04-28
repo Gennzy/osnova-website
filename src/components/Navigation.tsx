@@ -1,11 +1,19 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useScrolled } from '../hooks';
 
 export function Navigation({ onOpenCalc }: { onOpenCalc: () => void }) {
   const scrolled = useScrolled(100);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   const scrollTo = (id: string) => {
+    if (!isHome) {
+      window.location.href = `/#${id}`;
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
@@ -30,6 +38,7 @@ export function Navigation({ onOpenCalc }: { onOpenCalc: () => void }) {
             <div className={`nav-link ${navTextColor}`} onClick={() => scrollTo('portfolio')}>Проекты</div>
             <div className={`nav-link ${navTextColor}`} onClick={() => scrollTo('process')}>Процесс</div>
             <div className={`nav-link ${navTextColor}`} onClick={() => scrollTo('faq')}>FAQ</div>
+            <Link to="/blog" className={`nav-link ${navTextColor}`}>Блог</Link>
           </div>
 
           <div className="flex items-center space-x-6">
@@ -76,6 +85,13 @@ export function Navigation({ onOpenCalc }: { onOpenCalc: () => void }) {
                 {item.label}
               </button>
             ))}
+            <Link
+              to="/blog"
+              className="font-serif text-4xl tracking-tight hover:italic transition-all"
+              onClick={() => setMobileOpen(false)}
+            >
+              Блог
+            </Link>
             <button
               onClick={() => { setMobileOpen(false); onOpenCalc(); }}
               className="btn-luxury mt-8"
