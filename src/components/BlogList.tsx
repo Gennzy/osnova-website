@@ -5,11 +5,11 @@ import { useInView } from '../hooks';
 function BlogCard({ slug, title, excerpt, date, readTime, category, image }: {
   slug: string; title: string; excerpt: string; date: string; readTime: string; category: string; image: string;
 }) {
-  const { ref, inView } = useInView();
+  const { ref, isVisible } = useInView();
   const formatted = new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <article ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <article ref={ref} className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <Link to={`/blog/${slug}`} className="group block">
         <div className="overflow-hidden mb-6">
           <img
