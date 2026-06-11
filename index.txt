@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSNOVA — Премиальный ремонт и дизайн в Санкт-Петербурге</title>
+    <title>LAGODA — Премиальный ремонт и дизайн в Санкт-Петербурге</title>
     
     <!-- Фавикон (Icon для вкладки) в формате SVG -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><text y=%2250%%22 x=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2260%22 fill=%22white%22>O</text></svg>">
@@ -201,7 +201,7 @@
     <!-- Навигация -->
     <nav id="main-nav" class="fixed w-full z-50 mix-blend-difference py-8 px-8 md:px-16 flex justify-between items-center transition-all duration-500">
         <div class="cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <span class="font-serif text-3xl tracking-tighter text-white transition-opacity group-hover:opacity-70">OSNOVA</span>
+            <span class="font-serif text-3xl tracking-tighter text-white transition-opacity group-hover:opacity-70">LAGODA</span>
         </div>
         <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium text-white/70">
             <div class="nav-link text-white" onclick="scrollToId('about')">Бюро</div>
@@ -245,7 +245,7 @@
                     <div class="md:col-span-5 reveal">
                         <h2 class="text-4xl md:text-6xl mb-12">Мы создаем <br> <span class="italic">визуальную тишину.</span></h2>
                         <p class="text-stone-500 font-light text-lg leading-relaxed mb-12">
-                            Osnova — это симбиоз архитектурного подхода и эстетики Pinterest. Мы проектируем пространства в Санкт-Петербурге, в которых каждая деталь имеет значение. Наша цель — создать дом, который будет актуален десятилетиями.
+                            LAGODA — это симбиоз архитектурного подхода и эстетики Pinterest. Мы проектируем пространства в Санкт-Петербурге, в которых каждая деталь имеет значение. Наша цель — создать дом, который будет актуален десятилетиями.
                         </p>
                         <div class="space-y-8">
                             <div class="group border-t border-stone-100 pt-6 cursor-default hover:bg-stone-50 transition-colors px-2 -mx-2 rounded-sm">
@@ -426,7 +426,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
                 <div class="md:col-span-4">
-                    <span class="font-serif text-4xl tracking-tighter block mb-6">OSNOVA</span>
+                    <span class="font-serif text-4xl tracking-tighter block mb-6">LAGODA</span>
                     <p class="text-stone-400 font-light text-sm leading-relaxed max-w-xs">
                         Бюро интерьерных решений в Санкт-Петербурге, где архитектурная точность встречается с эстетикой повседневности.
                     </p>
@@ -470,7 +470,7 @@
             </div>
 
             <div class="flex flex-col md:flex-row justify-between items-center border-t border-stone-50 pt-8 opacity-40 text-[9px] uppercase tracking-[0.3em]">
-                <p>© 2026 OSNOVA Design Bureau. Только Санкт-Петербург и ЛО.</p>
+                <p>© 2026 LAGODA Design Bureau. Только Санкт-Петербург и ЛО.</p>
                 <div class="flex space-x-8">
                     <a onclick="showInfo('privacy')" class="cursor-pointer hover:opacity-60 transition-opacity">Политика конфиденциальности</a>
                 </div>
@@ -494,12 +494,12 @@
 
         const infoData = {
             about: {
-                title: "О Бюро Osnova (СПб)",
+                title: "О Бюро LAGODA (СПб)",
                 content: `
                     <div class="reveal visible">
                         <h2 class="text-4xl font-serif italic mb-8 text-center">Философия архитектурной тишины в Петербурге</h2>
                         <p class="text-lg font-light text-stone-600 leading-relaxed mb-12">
-                            Бюро Osnova было основано в 2018 году. Мы специализируемся исключительно на объектах Санкт-Петербурга, работая со старым фондом, новыми премиальными ЖК и загородными домами Ленобласти.
+                            Бюро LAGODA было основано в 2018 году. Мы специализируемся исключительно на объектах Санкт-Петербурга, работая со старым фондом, новыми премиальными ЖК и загородными домами Ленобласти.
                         </p>
                         <div class="info-grid">
                             <div class="info-card">
@@ -588,7 +588,7 @@
                         <div class="space-y-12 text-stone-600 font-light leading-relaxed">
                             <section>
                                 <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">1. Персональные данные</h4>
-                                <p class="text-sm mb-4">Оставляя заявку на Сайте, Пользователь дает согласие на обработку своих персональных данных (имя, телефон, адрес электронной почты) в целях предоставления консультаций и оформления услуг бюро OSNOVA.</p>
+                                <p class="text-sm mb-4">Оставляя заявку на Сайте, Пользователь дает согласие на обработку своих персональных данных (имя, телефон, адрес электронной почты) в целях предоставления консультаций и оформления услуг бюро LAGODA.</p>
                                 <p class="text-sm">Администрация обязуется не передавать данные Пользователя третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
                             </section>
 
@@ -614,7 +614,7 @@
                                 <div>
                                     <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Контакты</h4>
                                     <p class="text-[11px] leading-relaxed">
-                                        Email: info@osnova.build.ru<br>
+                                        Email: info@lagoda.build.ru<br>
                                         Тел: +7 (918) 004-52-66
                                     </p>
                                 </div>
