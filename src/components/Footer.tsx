@@ -53,7 +53,7 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-stone-50 pt-8 opacity-40 text-[9px] uppercase tracking-[0.3em]">
-          <p>&copy; 2026 OSNOVA Design Bureau. Только Санкт-Петербург и ЛО.</p>
+          <p>&copy; 2026 LAGODA Design Bureau. Только Санкт-Петербург и ЛО.</p>
           <div className="flex space-x-8 mt-4 md:mt-0">
             <a onClick={() => onOpenInfo('privacy')} className="cursor-pointer hover:opacity-60 transition-opacity">Политика конфиденциальности</a>
           </div>
