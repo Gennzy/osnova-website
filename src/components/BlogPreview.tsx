@@ -40,7 +40,7 @@ export function BlogPreview() {
         <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="text-[10px] uppercase tracking-[0.5em] text-stone-300 block mb-6">Блог</span>
           <h2 className="text-4xl md:text-5xl font-light" style={{ fontFamily: "'Cormorant', serif" }}>
-            Журнал Osnova
+            Журнал LAGODA
           </h2>
         </div>
 
