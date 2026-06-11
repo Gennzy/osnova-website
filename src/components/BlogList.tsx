@@ -43,7 +43,7 @@ export function BlogList() {
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-8 md:px-16 pt-40 pb-24">
         <div className="text-center mb-20">
-          <span className="text-[10px] uppercase tracking-[0.5em] text-stone-300 block mb-6">Блог Osnova</span>
+          <span className="text-[10px] uppercase tracking-[0.5em] text-stone-300 block mb-6">Блог LAGODA</span>
           <h1 className="text-5xl md:text-6xl font-light" style={{ fontFamily: "'Cormorant', serif" }}>
             Журнал
           </h1>
