@@ -22,7 +22,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
   if (fadeOut) {
     return (
       <div className="fixed inset-0 z-[200] bg-[#1a1a1a] flex items-center justify-center transition-opacity duration-500 opacity-0 pointer-events-none">
-        <span className="font-serif text-4xl text-white tracking-tighter">OSNOVA</span>
+        <span className="font-serif text-4xl text-white tracking-tighter">LAGODA</span>
       </div>
     );
   }
@@ -30,7 +30,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
   return (
     <div className="fixed inset-0 z-[200] bg-[#1a1a1a] flex flex-col items-center justify-center">
       <span className="font-serif text-4xl text-white tracking-tighter mb-8" style={{ animation: 'fadeIn 0.8s ease forwards' }}>
-        OSNOVA
+        LAGODA
       </span>
       <div className="w-48 h-px bg-white/10 relative overflow-hidden">
         <div
