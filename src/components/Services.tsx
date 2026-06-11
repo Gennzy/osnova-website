@@ -62,7 +62,7 @@ export function Services() {
     },
     {
       title: 'Авторский надзор',
-      price: 'от 4 000 ₽ / выезд',
+      price: 'от 5 000 ₽ / выезд',
       desc: 'Еженедельные выезды архитектора на объект в СПб и ЛО. Контроль качества на каждом этапе строительства.',
       icon: (
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-stone-400">
