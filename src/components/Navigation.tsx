@@ -29,7 +29,7 @@ export function Navigation({ onOpenCalc }: { onOpenCalc: () => void }) {
       <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-[0_1px_0_rgba(0,0,0,0.05)] py-4 px-8 md:px-16' : 'bg-transparent py-8 px-8 md:px-16'}`}>
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className={`font-serif text-3xl tracking-tighter transition-opacity group-hover:opacity-70 ${navTextColor}`}>OSNOVA</span>
+            <span className={`font-serif text-3xl tracking-tighter transition-opacity group-hover:opacity-70 ${navTextColor}`}>LAGODA</span>
           </div>
 
           <div className="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium">
