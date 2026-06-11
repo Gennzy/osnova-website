@@ -3,12 +3,12 @@ import { ModalOverlay } from './ModalOverlay';
 function getInfoData(key: string) {
   const map: Record<string, { title: string; content: string }> = {
     about: {
-      title: 'О Бюро Osnova (СПб)',
+      title: 'О Бюро LAGODA (СПб)',
       content: `
         <div>
           <h2 class="text-4xl font-serif italic mb-8 text-center" style="font-family:'Cormorant',serif">Философия архитектурной тишины в Петербурге</h2>
           <p class="text-lg font-light text-stone-600 leading-relaxed mb-12">
-            Бюро Osnova было основано в 2018 году. Мы специализируемся исключительно на объектах Санкт-Петербурга, работая со старым фондом, новыми премиальными ЖК и загородными домами Ленобласти.
+            Бюро LAGODA было основано в 2018 году. Мы специализируемся исключительно на объектах Санкт-Петербурга, работая со старым фондом, новыми премиальными ЖК и загородными домами Ленобласти.
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div class="border-l border-stone-200 pl-6">
@@ -92,11 +92,11 @@ function getInfoData(key: string) {
             <div class="pt-8 border-t border-stone-100 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Реквизиты</h4>
-                <p class="text-[11px] leading-relaxed">ИП Багдасарян Эдуард Артурович<br/>ИНН: 230913737102<br/>г. Санкт-Петербург</p>
+                <p class="text-[11px] leading-relaxed">ИП Баласанян Левон Саркисович<br/>ИНН: 230913737102<br/>г. Санкт-Петербург</p>
               </div>
               <div>
                 <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Контакты</h4>
-                <p class="text-[11px] leading-relaxed">Email: info@osnova.build.ru<br/>Тел: +7 (918) 004-52-66</p>
+                <p class="text-[11px] leading-relaxed">Email: info@osnova.build.ru<br/>Тел: +7 (901) 311-15-15</p>
               </div>
             </div>
           </div>
