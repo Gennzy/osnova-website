@@ -4,7 +4,7 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
           <div className="md:col-span-4">
-            <img src="/logo_dark.png" alt="LAGODA" className="h-20 w-auto mb-6" />
+            <img src="/logo_dark.png" alt="LAGODA" className="w-48 h-auto mb-6" />
             <p className="text-stone-400 font-light text-sm leading-relaxed max-w-xs">
               Бюро интерьерных решений в Санкт-Петербурге, где архитектурная точность встречается с эстетикой повседневности.
             </p>
