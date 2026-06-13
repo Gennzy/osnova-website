@@ -78,12 +78,12 @@ function getInfoData(key: string) {
           <div class="space-y-12 text-stone-600 font-light leading-relaxed">
             <section>
               <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">1. Персональные данные</h4>
-              <p class="text-sm mb-4">Оставляя заявку на Сайте, Пользователь дает согласие на обработку своих персональных данных (имя, телефон, адрес электронной почты) в целях предоставления консультаций и оформления услуг бюро OSNOVA.</p>
+              <p class="text-sm mb-4">Оставляя заявку на Сайте, Пользователь дает согласие на обработку своих персональных данных (имя, телефон, адрес электронной почты) в целях предоставления консультаций и оформления услуг бюро LAGODA.</p>
               <p class="text-sm">Администрация обязуется не передавать данные Пользователя третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
             </section>
             <section>
               <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">2. Интеллектуальная собственность</h4>
-              <p class="text-sm">Весь контент (тексты, изображения, дизайн, фотографии проектов), размещенный на Сайте, является объектом интеллектуальной собственности бюро OSNOVA.</p>
+              <p class="text-sm">Весь контент (тексты, изображения, дизайн, фотографии проектов), размещенный на Сайте, является объектом интеллектуальной собственности бюро LAGODA.</p>
             </section>
             <section>
               <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">3. Отказ от ответственности</h4>
@@ -91,12 +91,9 @@ function getInfoData(key: string) {
             </section>
             <div class="pt-8 border-t border-stone-100 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Реквизиты</h4>
-                <p class="text-[11px] leading-relaxed">ИП Баласанян Левон Саркисович<br/>ИНН: 230913737102<br/>г. Санкт-Петербург</p>
-              </div>
               <div>
                 <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Контакты</h4>
-                <p class="text-[11px] leading-relaxed">Email: info@osnova.build.ru<br/>Тел: +7 (901) 311-15-15</p>
+                <p class="text-[11px] leading-relaxed">Email: info@osnova.build.ru<br/>Тел: +7 (994) 440-30-30</p>
               </div>
             </div>
           </div>
