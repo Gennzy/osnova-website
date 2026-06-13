@@ -30,9 +30,9 @@ export function Navigation({ onOpenCalc }: { onOpenCalc: () => void }) {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img
-              src="/logo.png"
+              src={scrolled ? '/logo_dark.png' : '/logo_white.png'}
               alt="LAGODA"
-              className={`h-10 w-auto transition-opacity group-hover:opacity-70 ${scrolled ? 'invert' : ''}`}
+              className="h-12 w-auto transition-opacity group-hover:opacity-70"
             />
           </div>
 
