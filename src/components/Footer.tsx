@@ -9,11 +9,8 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
               Бюро интерьерных решений в Санкт-Петербурге, где архитектурная точность встречается с эстетикой повседневности.
             </p>
             <div className="mt-8 flex space-x-6">
-              <a href="https://t.me/osnova_co" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-black transition-colors">
+              <a href="https://t.me/lagoda_group" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-black transition-colors">
                 <span className="text-[10px] uppercase tracking-widest">Telegram</span>
-              </a>
-              <a href="#" className="text-stone-400 hover:text-black transition-colors">
-                <span className="text-[10px] uppercase tracking-widest">Instagram</span>
               </a>
             </div>
           </div>
@@ -41,7 +38,7 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
           <div className="md:col-span-3">
             <h4 className="text-[10px] uppercase tracking-[0.3em] font-medium mb-8">Связаться</h4>
             <div className="space-y-4">
-              <p className="text-sm font-light">Санкт-Петербург</p>
+              <p className="text-sm font-light">Санкт-Петербург<br />Бизнес-центр &laquo;Морской&raquo;</p>
               <a href="tel:+79944403030" className="text-lg font-light block hover:italic transition-all underline decoration-stone-100 underline-offset-8">
                 +7 994 440 30 30
               </a>
