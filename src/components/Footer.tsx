@@ -41,9 +41,9 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
           <div className="md:col-span-3">
             <h4 className="text-[10px] uppercase tracking-[0.3em] font-medium mb-8">Связаться</h4>
             <div className="space-y-4">
-              <p className="text-sm font-light">Санкт-Петербург, Большая Морская ул., 3<br />Бизнес-центр &laquo;Морской&raquo;</p>
-              <a href="tel:+79180045266" className="text-lg font-light block hover:italic transition-all underline decoration-stone-100 underline-offset-8">
-                +7 918 004 52 66
+              <p className="text-sm font-light">Санкт-Петербург<br />Бизнес-центр &laquo;Морской&raquo;</p>
+              <a href="tel:+79944403030" className="text-lg font-light block hover:italic transition-all underline decoration-stone-100 underline-offset-8">
+                +7 994 440 30 30
               </a>
               <button onClick={onOpenCalc} className="btn-luxury mt-4 text-[10px] px-6 py-3">
                 Оставить заявку
