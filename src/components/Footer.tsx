@@ -42,6 +42,9 @@ export function Footer({ onOpenInfo, onOpenCalc }: { onOpenInfo: (key: string) =
               <a href="tel:+79944403030" className="text-lg font-light block hover:italic transition-all underline decoration-stone-100 underline-offset-8">
                 +7 994 440 30 30
               </a>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">
+                Лагода Дамир Максимович
+              </p>
               <button onClick={onOpenCalc} className="btn-luxury mt-4 text-[10px] px-6 py-3">
                 Оставить заявку
               </button>
