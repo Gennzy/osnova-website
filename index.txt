@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAGODA — Премиальный ремонт и дизайн в Санкт-Петербурге</title>
+    
+    <!-- Фавикон (Icon для вкладки) в формате SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><text y=%2250%%22 x=%2250%%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2260%22 fill=%22white%22>O</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #fcfcfc;
+            --text-main: #1a1a1a;
+            --accent: #8d8172;
+            --line: rgba(0,0,0,0.06);
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3, .font-serif { font-family: 'Cormorant', serif; font-weight: 300; }
+        
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .nav-link {
+            position: relative;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover { opacity: 0.7; }
+        .nav-link:hover::after { width: 100%; }
+
+        .btn-luxury {
+            border: 1px solid var(--text-main);
+            padding: 18px 40px;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            cursor: pointer;
+            z-index: 1;
+            background: transparent;
+        }
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 100%;
+            background: var(--text-main);
+            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+        }
+        .btn-luxury:hover { color: white; }
+        .btn-luxury:hover::before { width: 100%; }
+
+        .img-wrap { 
+            overflow: hidden; 
+            background: #f3f3f3; 
+            position: relative; 
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .img-wrap img {
+            transition: opacity 1.2s ease, transform 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+        }
+        .img-wrap img.ready { opacity: 1; }
+        .img-wrap:hover img { transform: scale(1.05); }
+
+        .faq-item { border-bottom: 1px solid var(--line); transition: background 0.3s ease; }
+        .faq-item:hover { background: rgba(0,0,0,0.01); }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0, 1, 0, 1); }
+        .faq-item.active .faq-content { max-height: 1000px; transition: max-height 0.6s ease-in; }
+        .faq-trigger svg { transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .faq-item.active .faq-trigger svg { transform: rotate(45deg); }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(15px);
+            overflow-y: auto;
+            padding: 40px 0;
+        }
+        .modal-overlay.active { display: block; animation: fadeIn 0.4s ease forwards; }
+        
+        .modal-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .modal-overlay.active .modal-inner { transform: translateY(0); opacity: 1; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .hover-lift { transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .hover-lift:hover { transform: translateY(-5px); }
+
+        .progress-bar {
+            height: 2px;
+            background: #eee;
+            width: 100%;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--text-main);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        #main-nav.scrolled {
+            background: white;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        .footer-link {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #777;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+        .footer-link:hover { color: #1a1a1a; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .info-card {
+            border-left: 1px solid #eee;
+            padding-left: 1.5rem;
+        }
+
+        .input-luxury {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            background: transparent;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+        .input-luxury:focus {
+            border-bottom-color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav id="main-nav" class="fixed w-full z-50 mix-blend-difference py-8 px-8 md:px-16 flex justify-between items-center transition-all duration-500">
+        <div class="cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span class="font-serif text-3xl tracking-tighter text-white transition-opacity group-hover:opacity-70">LAGODA</span>
+        </div>
+        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium text-white/70">
+            <div class="nav-link text-white" onclick="scrollToId('about')">Бюро</div>
+            <div class="nav-link text-white" onclick="scrollToId('portfolio')">Проекты</div>
+            <div class="nav-link text-white" onclick="scrollToId('faq')">FAQ</div>
+        </div>
+        <div class="flex items-center space-x-8">
+            <button onclick="toggleModal('calc-modal', true)" class="text-white text-[10px] border border-white/20 px-6 py-2 tracking-widest hover:bg-white hover:text-black transition-all duration-300 uppercase active:scale-95">Расчет проекта</button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Главный экран -->
+        <section class="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="img-wrap w-full h-full cursor-default">
+                    <img id="hero-img" 
+                         src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" 
+                         class="ready w-full h-full object-cover brightness-[0.6]" 
+                         alt="[Премиальный интерьер гостиной]">
+                </div>
+            </div>
+            <div class="relative z-10 max-w-4xl reveal">
+                <span class="text-[10px] uppercase tracking-[0.5em] text-white/80 mb-6 block">Санкт-Петербург и Ленобласть</span>
+                <h1 class="text-5xl md:text-8xl text-white mb-8 leading-tight">Эстетика <br> <span class="italic font-light text-white/90">вне времени.</span></h1>
+                <div class="flex justify-center mt-12">
+                    <button onclick="scrollToId('portfolio')" class="btn-luxury !border-white !text-white">Смотреть работы</button>
+                </div>
+            </div>
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer" onclick="scrollToId('about')">
+                <div class="w-px h-16 bg-white/20 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-full bg-white" style="animation: scrollLine 2s infinite"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О бюро -->
+        <section id="about" class="py-32 px-8 md:px-24 bg-white relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-12 gap-16 items-start">
+                    <div class="md:col-span-5 reveal">
+                        <h2 class="text-4xl md:text-6xl mb-12">Мы создаем <br> <span class="italic">визуальную тишину.</span></h2>
+                        <p class="text-stone-500 font-light text-lg leading-relaxed mb-12">
+                            LAGODA — это симбиоз архитектурного подхода и эстетики Pinterest. Мы проектируем пространства в Санкт-Петербурге, в которых каждая деталь имеет значение. Наша цель — создать дом, который будет актуален десятилетиями.
+                        </p>
+                        <div class="space-y-8">
+                            <div class="group border-t border-stone-100 pt-6 cursor-default hover:bg-stone-50 transition-colors px-2 -mx-2 rounded-sm">
+                                <span class="text-[10px] uppercase tracking-widest text-stone-400 block mb-2 transition-colors group-hover:text-black">01. Концепция</span>
+                                <p class="text-sm">Глубокое исследование и создание уникального мудборда вашего будущего дома в Петербурге. Мы ищем баланс между вашим образом жизни и архитектурной средой города.</p>
+                            </div>
+                            <div class="group border-t border-stone-100 pt-6 cursor-default hover:bg-stone-50 transition-colors px-2 -mx-2 rounded-sm">
+                                <span class="text-[10px] uppercase tracking-widest text-stone-400 block mb-2 transition-colors group-hover:text-black">02. Реализация</span>
+                                <p class="text-sm">Технический надзор и работа с лучшими строительными бригадами Санкт-Петербурга. Мы берем на себя все сложности стройки, оставляя вам только радость от результата.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 grid grid-cols-2 gap-4 md:gap-8 reveal">
+                        <div class="img-wrap rounded-sm aspect-[3/4] mt-24 shadow-2xl hover-lift">
+                            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000&auto=format&fit=crop" 
+                                 class="ready w-full h-full object-cover" 
+                                 alt="[Светлый минималистичный интерьер]">
+                        </div>
+                        <div class="img-wrap rounded-sm aspect-[3/5] shadow-2xl hover-lift">
+                            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop" 
+                                 class="ready w-full h-full object-cover" 
+                                 alt="[Детали интерьера]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Портфолио -->
+        <section id="portfolio" class="py-32 px-8 md:px-16 bg-[#fafafa]">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-24 reveal">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.4em] text-stone-400 block mb-4">Selected Works in SPB</span>
+                        <h2 class="text-4xl md:text-5xl uppercase font-light tracking-widest">Портфолио</h2>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-x-16 gap-y-32">
+                    <div class="reveal group cursor-pointer">
+                        <div class="img-wrap aspect-[16/10] mb-8 shadow-sm rounded-sm">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop" class="ready w-full h-full object-cover" alt="[Проект резиденции]">
+                        </div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-3xl mb-1 group-hover:italic transition-all duration-500">Morskaya Naberezhnaya</h3>
+                                <span class="text-[10px] uppercase tracking-widest text-stone-400">Васильевский остров • 120 м² • 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal group cursor-pointer md:pt-40">
+                        <div class="img-wrap aspect-[16/10] mb-8 shadow-sm rounded-sm">
+                            <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1200&auto=format&fit=crop" class="ready w-full h-full object-cover" alt="[Загородный дом]">
+                        </div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-3xl mb-1 group-hover:italic transition-all duration-500">Repino Forest Villa</h3>
+                                <span class="text-[10px] uppercase tracking-widest text-stone-400">Репино • 380 м² • 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-32 px-8 bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-left mb-16 reveal">
+                    <span class="text-[10px] uppercase tracking-[0.4em] text-stone-400 block mb-4">Q&A</span>
+                    <h2 class="text-4xl md:text-5xl font-light uppercase tracking-tight">Частые вопросы</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="faq-item reveal">
+                        <button class="faq-trigger w-full py-8 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="text-lg md:text-xl font-light uppercase tracking-wide">Вы работаете в других городах?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-content text-stone-500 font-light leading-relaxed pb-8">
+                            На данный момент наше бюро сфокусировано на реализации объектов исключительно в Санкт-Петербурге и Ленинградской области. Это позволяет нам обеспечивать высочайший уровень авторского надзора и контроля качества.
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <button class="faq-trigger w-full py-8 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="text-lg md:text-xl font-light uppercase tracking-wide">Как рассчитывается стоимость?</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="faq-content text-stone-500 font-light leading-relaxed pb-8">
+                            Стоимость зависит от выбранного пакета услуг (чертежи, визуализация или проект «под ключ») и площади объекта. Мы работаем по фиксированной ставке за квадратный метр, которая фиксируется в договоре.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-8 bg-stone-50 text-center border-t border-stone-100">
+            <div class="reveal">
+                <h2 class="text-3xl md:text-4xl font-serif mb-8 italic">Готовы обсудить ваш проект в Санкт-Петербурге?</h2>
+                <button onclick="toggleModal('calc-modal', true)" class="text-[11px] uppercase tracking-[0.4em] border-b border-black pb-2 hover:opacity-50 transition-all duration-300 transform hover:scale-105 active:scale-95">Оставить заявку</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для информации -->
+    <div id="info-modal" class="modal-overlay" onclick="if(event.target === this) toggleModal('info-modal', false)">
+        <div class="modal-inner">
+            <button onclick="toggleModal('info-modal', false)" class="fixed top-8 right-8 text-stone-400 hover:text-black transition-transform hover:rotate-90 z-[110]">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div id="info-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно отклика на вакансию -->
+    <div id="job-modal" class="modal-overlay !z-[150]" onclick="if(event.target === this) toggleModal('job-modal', false)">
+        <div class="modal-inner !max-w-md bg-white p-12 shadow-2xl">
+            <button onclick="toggleModal('job-modal', false)" class="absolute top-6 right-6 text-stone-300 hover:text-black">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <h3 id="job-title-display" class="text-2xl font-serif mb-2 italic">Отклик на вакансию</h3>
+            <p class="text-xs text-stone-400 uppercase tracking-widest mb-8">Заполните данные для связи</p>
+            
+            <div class="space-y-6">
+                <input type="text" id="job-name" placeholder="Ваше имя" class="input-luxury">
+                <input type="text" id="job-contact" placeholder="Телефон или Telegram" class="input-luxury">
+                <input type="text" id="job-portfolio" placeholder="Ссылка на портфолио (Behance/PDF)" class="input-luxury">
+                <button onclick="sendJobApplication()" class="btn-luxury w-full mt-4">Отправить отклик</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Умный Калькулятор -->
+    <div id="calc-modal" class="modal-overlay !bg-white/95" onclick="if(event.target === this) toggleModal('calc-modal', false)">
+        <div class="modal-inner !max-w-2xl">
+            <button onclick="toggleModal('calc-modal', false)" class="absolute top-8 right-8 text-stone-400 hover:text-black transition-transform hover:rotate-90">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+
+            <div id="calculator-steps">
+                <div class="step active" data-step="1">
+                    <h2 class="text-2xl font-light mb-8 uppercase tracking-widest text-center">Тип вашего объекта</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="choice-card p-8 border border-stone-100 text-center cursor-pointer hover:bg-stone-50" onclick="setChoice('type', 'Квартира', 1)">Квартира</div>
+                        <div class="choice-card p-8 border border-stone-100 text-center cursor-pointer hover:bg-stone-50" onclick="setChoice('type', 'Загородный дом', 1)">Загородный дом</div>
+                    </div>
+                </div>
+                <div class="step hidden" data-step="2">
+                    <h2 class="text-2xl font-light mb-8 uppercase tracking-widest text-center">Площадь</h2>
+                    <input type="number" id="calc-area" placeholder="м²" class="input-luxury text-center text-4xl font-serif">
+                    <button class="btn-luxury w-full mt-12" onclick="nextStep(2)">Далее</button>
+                </div>
+                <div class="step hidden" data-step="4">
+                    <h2 class="text-2xl font-light mb-8 uppercase tracking-widest text-center">Контакты</h2>
+                    <input type="text" id="user-name" placeholder="Ваше имя" class="input-luxury mb-6">
+                    <input type="text" id="user-contact" placeholder="Телефон или TG" class="input-luxury mb-8">
+                    <button class="btn-luxury w-full" onclick="submitFinalCalc()">Получить расчет</button>
+                </div>
+                <div class="step hidden" id="success-step">
+                    <div class="text-center py-12">
+                        <h2 class="text-2xl font-light mb-4 uppercase tracking-widest">Спасибо!</h2>
+                        <p class="text-stone-500">Менеджер подготовит расчет и свяжется с вами.</p>
+                        <button class="btn-luxury mt-8" onclick="toggleModal('calc-modal', false)">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="bg-white border-t border-stone-100 pt-24 pb-12 px-8 md:px-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
+                <div class="md:col-span-4">
+                    <span class="font-serif text-4xl tracking-tighter block mb-6">LAGODA</span>
+                    <p class="text-stone-400 font-light text-sm leading-relaxed max-w-xs">
+                        Бюро интерьерных решений в Санкт-Петербурге, где архитектурная точность встречается с эстетикой повседневности.
+                    </p>
+                    <div class="mt-8 flex space-x-6">
+                        <a href="https://t.me/osnova_co" target="_blank" class="text-stone-400 hover:text-black transition-colors">
+                            <span class="text-[10px] uppercase tracking-widest">Telegram</span>
+                        </a>
+                        <a href="#" class="text-stone-400 hover:text-black transition-colors">
+                            <span class="text-[10px] uppercase tracking-widest">Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 md:offset-1">
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-medium mb-8">Бюро</h4>
+                    <nav>
+                        <a onclick="showInfo('about')" class="footer-link">О нас</a>
+                        <a onclick="showInfo('projects')" class="footer-link">Проекты</a>
+                        <a onclick="showInfo('faq_full')" class="footer-link">FAQ</a>
+                        <a onclick="showInfo('careers')" class="footer-link">Карьера</a>
+                    </nav>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-medium mb-8">Услуги</h4>
+                    <nav>
+                        <a onclick="showInfo('design')" class="footer-link">Проектирование</a>
+                        <a onclick="showInfo('repair')" class="footer-link">Ремонт</a>
+                        <a onclick="showInfo('styling')" class="footer-link">Комплектация</a>
+                        <a onclick="showInfo('supervision')" class="footer-link">Надзор</a>
+                    </nav>
+                </div>
+
+                <div class="md:col-span-3">
+                    <h4 class="text-[10px] uppercase tracking-[0.3em] font-medium mb-8">Связаться</h4>
+                    <div class="space-y-4">
+                        <p class="text-sm font-light">Санкт-Петербург, Большая Морская ул., 3<br>Бизнес-центр «Морской»</p>
+                        <a href="tel:+79180045266" class="text-lg font-light block hover:italic transition-all underline decoration-stone-100 underline-offset-8">+7 918 004 52 66</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-stone-50 pt-8 opacity-40 text-[9px] uppercase tracking-[0.3em]">
+                <p>© 2026 LAGODA Design Bureau. Только Санкт-Петербург и ЛО.</p>
+                <div class="flex space-x-8">
+                    <a onclick="showInfo('privacy')" class="cursor-pointer hover:opacity-60 transition-opacity">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const TG_TOKEN = "7756149818:AAHndY8iH4pT2-N6V2_G5rM6S-v-mI1Tf9w"; 
+        const TG_CHAT_ID = "-1002340356193";
+
+        async function sendToTelegram(message) {
+            try {
+                await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: TG_CHAT_ID, text: message, parse_mode: 'HTML' })
+                });
+            } catch (e) { console.error("TG Error", e); }
+        }
+
+        const infoData = {
+            about: {
+                title: "О Бюро LAGODA (СПб)",
+                content: `
+                    <div class="reveal visible">
+                        <h2 class="text-4xl font-serif italic mb-8 text-center">Философия архитектурной тишины в Петербурге</h2>
+                        <p class="text-lg font-light text-stone-600 leading-relaxed mb-12">
+                            Бюро LAGODA было основано в 2018 году. Мы специализируемся исключительно на объектах Санкт-Петербурга, работая со старым фондом, новыми премиальными ЖК и загородными домами Ленобласти.
+                        </p>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4 class="text-xs uppercase tracking-widest mb-4">Локация</h4>
+                                <p class="text-sm">Мы работаем только по СПб и ЛО, чтобы гарантировать личное присутствие архитектора на объекте.</p>
+                            </div>
+                            <div class="info-card">
+                                <h4 class="text-xs uppercase tracking-widest mb-4">Команда</h4>
+                                <p class="text-sm">Эксперты в петербургской архитектуре и современных минималистичных решениях.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            projects: {
+                title: "Проекты в Санкт-Петербурге",
+                content: `
+                    <div class="reveal visible">
+                        <h2 class="text-4xl font-serif mb-8 text-center uppercase tracking-widest">Архив работ</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+                            <div class="group">
+                                <div class="img-wrap aspect-video mb-4"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800" class="ready w-full h-full object-cover"></div>
+                                <h4 class="text-lg italic">Apartment on Krestovsky</h4>
+                            </div>
+                            <div class="group">
+                                <div class="img-wrap aspect-video mb-4"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800" class="ready w-full h-full object-cover"></div>
+                                <h4 class="text-lg italic">Sestroretsk Modern Villa</h4>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            careers: {
+                title: "Карьера в СПб",
+                content: `
+                    <div class="reveal visible">
+                        <h2 class="text-4xl font-serif italic mb-8 text-center">Ищем единомышленников в Петербурге</h2>
+                        <p class="text-center text-stone-500 mb-12">Мы расширяем команду нашего петербургского офиса.</p>
+                        <div class="grid gap-4">
+                            ${[
+                                { t: 'Ведущий архитектор', d: 'Опыт в СПб от 5 лет, знание ArchiCAD/Revit.' },
+                                { t: 'Дизайнер-визуализатор', d: 'Мастерство в 3ds Max + Corona, чувство света.' },
+                                { t: 'Менеджер проектов', d: 'Управление стройкой в СПб, комплектация.' },
+                                { t: 'Чертежник', d: 'Разработка рабочей документации, узлы.' }
+                            ].map(job => `
+                                <div class="border border-stone-100 p-8 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-stone-50 transition-all group">
+                                    <div class="mb-4 md:mb-0">
+                                        <h4 class="text-xl group-hover:italic transition-all">${job.t}</h4>
+                                        <p class="text-xs text-stone-400 mt-2">${job.d}</p>
+                                    </div>
+                                    <button onclick="openJobForm('${job.t}')" class="text-[10px] uppercase tracking-widest border-b border-black pb-1 hover:opacity-50 transition-all">Откликнуться</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `
+            },
+            design: {
+                title: "Проектирование",
+                content: `
+                    <div class="reveal visible">
+                        <h2 class="text-4xl font-serif mb-8">Дизайн-проект в СПб</h2>
+                        <p class="text-lg text-stone-600 mb-8">Создаем детальную инструкцию по реализации вашего интерьера с учетом специфики петербургских планировок.</p>
+                        <div class="p-8 bg-stone-50 font-serif italic text-2xl">от 7 500 ₽ / м²</div>
+                    </div>
+                `
+            },
+            repair: { title: "Ремонт", content: `<div class="reveal visible"><h2 class="text-4xl font-serif mb-8">Реализация (СПб)</h2><p class="text-stone-600">Собственные петербургские бригады и строгий контроль. от 25 000 ₽ / м²</p></div>` },
+            styling: { title: "Комплектация", content: `<div class="reveal visible"><h2 class="text-4xl font-serif mb-8">Стиль и Декор</h2><p class="text-stone-600">Подбор мебели в шоурумах Петербурга и работа с фабриками.</p></div>` },
+            supervision: { title: "Надзор", content: `<div class="reveal visible"><h2 class="text-4xl font-serif mb-8">Авторский надзор</h2><p class="text-stone-600">Еженедельные выезды архитектора на объект в СПб и ЛО.</p></div>` },
+            faq_full: {
+                title: "Вопросы",
+                content: `
+                    <div class="reveal visible max-w-2xl mx-auto space-y-8">
+                        <div><h4 class="font-medium mb-2">Вы работаете в Москве?</h4><p class="text-sm text-stone-500">Нет, на данный момент мы работаем исключительно в Санкт-Петербурге и ЛО.</p></div>
+                        <div><h4 class="font-medium mb-2">Сколько длится стройка в Петербурге?</h4><p class="text-sm text-stone-500">Для квартиры 100м² — около 6-8 месяцев.</p></div>
+                    </div>
+                `
+            },
+            privacy: {
+                title: "Политика конфиденциальности",
+                content: `
+                    <div class="reveal visible max-w-3xl mx-auto text-left py-8">
+                        <h2 class="text-3xl font-serif mb-8 italic">Пользовательское соглашение и политика данных</h2>
+                        
+                        <div class="space-y-12 text-stone-600 font-light leading-relaxed">
+                            <section>
+                                <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">1. Персональные данные</h4>
+                                <p class="text-sm mb-4">Оставляя заявку на Сайте, Пользователь дает согласие на обработку своих персональных данных (имя, телефон, адрес электронной почты) в целях предоставления консультаций и оформления услуг бюро LAGODA.</p>
+                                <p class="text-sm">Администрация обязуется не передавать данные Пользователя третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
+                            </section>
+
+                            <section>
+                                <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">2. Интеллектуальная собственность</h4>
+                                <p class="text-sm">Весь контент (тексты, изображения, дизайн, фотографии проектов), размещенный на Сайте, является объектом интеллектуальной собственности бюро LAGODA. Копирование или использование материалов без разрешения запрещено.</p>
+                            </section>
+
+                            <section>
+                                <h4 class="text-[10px] uppercase tracking-widest text-black mb-4">3. Отказ от ответственности</h4>
+                                <p class="text-sm">Информация на Сайте носит ознакомительный характер и не является публичной офертой в понимании ст. 437 ГК РФ. Мы стремимся к точности, но параметры проектов могут меняться при индивидуальном проектировании.</p>
+                            </section>
+
+                            <div class="pt-8 border-t border-stone-100 grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Реквизиты</h4>
+                                    <p class="text-[11px] leading-relaxed">
+                                        ИП Багдасарян Эдуард Артурович<br>
+                                        ИНН: 230913737102<br>
+                                        г. Санкт-Петербург
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="text-[10px] uppercase tracking-widest text-black mb-2">Контакты</h4>
+                                    <p class="text-[11px] leading-relaxed">
+                                        Email: info@lagoda.build.ru<br>
+                                        Тел: +7 (901) 311-15-15
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function showInfo(key) {
+            const data = infoData[key];
+            if (!data) return;
+            const container = document.getElementById('info-modal-content');
+            container.innerHTML = `
+                <span class="text-[10px] uppercase tracking-[0.5em] text-stone-300 block mb-12 text-center">${data.title}</span>
+                ${data.content}
+                <div class="mt-24 text-center">
+                    <button onclick="toggleModal('info-modal', false); toggleModal('calc-modal', true)" class="btn-luxury">Заказать проект в СПб</button>
+                </div>
+            `;
+            toggleModal('info-modal', true);
+        }
+
+        let selectedJob = "";
+        function openJobForm(title) {
+            selectedJob = title;
+            document.getElementById('job-title-display').innerText = `Отклик: ${title}`;
+            toggleModal('job-modal', true);
+        }
+
+        async function sendJobApplication() {
+            const name = document.getElementById('job-name').value;
+            const contact = document.getElementById('job-contact').value;
+            const portfolio = document.getElementById('job-portfolio').value;
+            if (!name || !contact) return;
+            const msg = `💼 <b>Новый отклик (СПб офис)</b>\n\n<b>Вакансия:</b> ${selectedJob}\n<b>Имя:</b> ${name}\n<b>Контакт:</b> ${contact}\n<b>Портфолио:</b> ${portfolio || 'не указано'}`;
+            await sendToTelegram(msg);
+            const modalInner = document.querySelector('#job-modal .modal-inner');
+            modalInner.innerHTML = `<div class="text-center py-12"><h2 class="text-2xl font-serif italic mb-4">Отклик отправлен</h2><p class="text-stone-500">Мы свяжемся с вами.</p><button onclick="toggleModal('job-modal', false)" class="btn-luxury mt-8">Закрыть</button></div>`;
+        }
+
+        async function submitFinalCalc() {
+            const name = document.getElementById('user-name').value;
+            const contact = document.getElementById('user-contact').value;
+            const area = document.getElementById('calc-area').value;
+            const msg = `🏠 <b>Заявка (СПб/ЛО)</b>\n\n<b>Объект:</b> ${calcState.type || 'не указан'}\n<b>Площадь:</b> ${area || '?'} м²\n<b>Клиент:</b> ${name}\n<b>Связь:</b> ${contact}`;
+            await sendToTelegram(msg);
+            document.querySelector(`[data-step="4"]`).classList.add('hidden');
+            document.getElementById('success-step').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = '100%';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const img = entry.target.querySelector('img');
+                    if (img) img.classList.add('ready');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        window.onload = () => {
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        };
+
+        function scrollToId(id) {
+            const el = document.getElementById(id);
+            if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        function toggleModal(id, show) {
+            const modal = document.getElementById(id);
+            if(show) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function toggleFaq(btn) { btn.parentElement.classList.toggle('active'); }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+                nav.classList.remove('mix-blend-difference');
+                nav.querySelectorAll('.nav-link, span, button').forEach(l => { l.style.color = 'black'; });
+                nav.querySelector('button').style.borderColor = 'rgba(0,0,0,0.1)';
+            } else {
+                nav.classList.remove('scrolled');
+                nav.classList.add('mix-blend-difference');
+                nav.querySelectorAll('.nav-link, span, button').forEach(l => { l.style.color = 'white'; });
+                nav.querySelector('button').style.borderColor = 'rgba(255,255,255,0.2)';
+            }
+        });
+
+        let calcState = { type: '' };
+        let currentStep = 1;
+        function nextStep(s) {
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('hidden');
+            currentStep = s + 1;
+            if (currentStep === 3) currentStep = 4;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = (currentStep/4*100) + '%';
+        }
+        function setChoice(k, v, s) { calcState[k] = v; nextStep(s); }
+    </script>
+</body>
+</html>
